@@ -1,0 +1,11 @@
+
+<ion-content [fullscreen]="true" color="dark">
+  <video autoplay class="activity-video">
+    <source [src]="videoURL">
+  </video>
+<ion-fab  horizontal="centre" vertical="bottom" slot="fixed">
+  <ion-fab-button color="danger" (click)="closeModal()">
+    <ion-icon name="close"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>
