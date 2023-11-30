@@ -6,7 +6,8 @@ import { Activity } from '../types';
 import { Firestore } from '@angular/fire/firestore';
 
 import { ActivityVideoPage } from '../activity-video/activity-video.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+import { authState } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-activity-detail',
@@ -17,6 +18,7 @@ export class ActivityDetailPage implements OnInit {
   activityDetail: Observable<Activity>;
 
   constructor(
+    private _toastController: ToastController,
     private _angularFireStore:Firestore,
     private _modalController:ModalController,activityService:ActivityService,activatedRoute: ActivatedRoute) {
     const activityID= activatedRoute.snapshot.params["activityID"];
@@ -37,8 +39,13 @@ return await this.activityDetail.subscribe(activityDetail =>{
 
   }
   addToFavorites(){
-
-
+  // Add to favorites via firestore
+  const toast = this._toastController.create({
+    message:"The Activity was added "+ this.activityDetail+ "to your favorites",
+    duration:3500,
+    position:"top"
+  });
+  toast.then((toastMessage)=>toastMessage.present())
   }
 
 }
